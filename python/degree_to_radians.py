@@ -33,7 +33,7 @@ def parse_flexible_dms(dms_string):
 
 
 # function to convert from Degree to Radians     
-def DegreeToRadians(x):
+def deg_to_rad(x):
     """
     Converts angle inputs to radians.
 
@@ -103,7 +103,7 @@ def DegreeToRadians(x):
 
             
 # function to convert from Radians to Degree   
-def RadiansToDegree(x):
+def rad_to_deg(x):
     """
     Converts radians to degrees or parses DMS to decimal degrees.
     
@@ -175,30 +175,30 @@ def mpfr(value, bit=128):
 # Usage examples
 if __name__ == "__main__":
     print("Degree\n")
-    result = DegreeToRadians("180")                 # will generate error, display the error
+    result = deg_to_rad("180")                   # will generate error, display the error
     if result is not None:                          # and provides a 'None' value 
         s = result * 34
     else:
         print("Calculation cannot be performed.\n")
 
     # More examples
-    print(DegreeToRadians(180.57))                    # Decimal degrees example
-    print(DegreeToRadians("180.57"))                  # Decimal degrees example
-    print(DegreeToRadians("180°"))                    # DMS
-    print(DegreeToRadians("180°40'13''"))             # DMS example
-    print(DegreeToRadians("180°68'10''"))             # incorrect DMS example
-    print(DegreeToRadians(2.3456e1))                  # Scientific notation example
-    print(DegreeToRadians("2.3456e1"))                # Scientific notation example
-    print(DegreeToRadians(mpfr("181.57")))            # mpfr decimal degrees example
-    print(DegreeToRadians(mpfr("N 181.57")))          # incorrect mpfr decimal degrees example
-    print(DegreeToRadians(mpfr("1.89°")))             # incorrect mpfr decimal degrees example
+    print(deg_to_rad(180.57))                       # Decimal degrees example
+    print(deg_to_rad("180.57"))                     # Decimal degrees example
+    print(deg_to_rad("180°"))                       # DMS
+    print(deg_to_rad("180°40'13''"))                # DMS example
+    print(deg_to_rad("180°68'10''"))                # incorrect DMS example
+    print(deg_to_rad(2.3456e1))                     # Scientific notation example
+    print(deg_to_rad("2.3456e1"))                   # Scientific notation example
+    print(deg_to_rad(mpfr("181.57")))               # mpfr decimal degrees example
+    print(deg_to_rad(mpfr("N 181.57")))             # incorrect mpfr decimal degrees example
+    print(deg_to_rad(mpfr("1.89°")))                # incorrect mpfr decimal degrees example
     
     print("Radians\n")
 
-    print(RadiansToDegree(3.14))  
-    print(RadiansToDegree("3.14"))  
-    print(RadiansToDegree(np.pi))                     # π → 180° (mpfr)
-    print(RadiansToDegree(mpfr('3.14159535', 128)))   # High precision
-    print(RadiansToDegree("1.234e1"))                 # Scientific → Degrees
-    print(RadiansToDegree("0.40938442"))              # DMS → Degrees (direct)
+    print(rad_to_deg(3.14))  
+    print(rad_to_deg("3.14"))  
+    print(rad_to_deg(np.pi))                     # π → 180° (mpfr)
+    print(rad_to_deg(mpfr('3.14159535', 128)))   # High precision
+    print(rad_to_deg("1.234e1"))                 # Scientific → Degrees
+    print(rad_to_deg("0.40938442"))              # DMS → Degrees (direct)
 

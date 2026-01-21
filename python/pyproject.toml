@@ -10,5 +10,9 @@ readme = "README.md"
 requires-python = ">=3.8"
 dependencies = ["numpy"]
 
+[project.optional-dependencies]
+precision = ["gmpy2>=2.1.0"]  # Für mpfr Nutzer
+dev = ["pytest", "black"]
+
 [project.urls]
 Homepage = "https://github.com/SamsonandDelilah/SciLab"
