@@ -21,7 +21,7 @@
 ## 📦 Installation
 
 ```Powershel or bash
-pip install git+https://github.com/SamsonandDelilah/SciLab.git#subdirectory=python
+pip install git+https://github.com/SamsonandDelilah/SciLib.git#subdirectory=python
 ```
 
 ## 💻 Usage ##
