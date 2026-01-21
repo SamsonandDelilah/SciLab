@@ -1,22 +1,22 @@
 ```markdown
-# SciLib - Precision Angle Conversion Library
+## SciLib - Precision Angle Conversion Library
 
-**Unified SOT conversion for ALL input formats with automatic validation!**
+**Unified single Source-of-Truth (SOT= conversion for ALL input formats with automatic validation!**
 
 ## 🚀 Motivation
 
 **Problem:** Every library handles angle systems differently:
-```
+
 numpy.deg2rad("180°20'")     → Error
 math.radians("180.57grad")   → Error  
 scipy.invalid_input("2g")    → Error
-```
+
 
 **SciLib solves it:** **1 API → all formats** with precision checking!
 
 ## 📦 Installation
 
-```bash
+```Powershel or bash
 pip install git+https://github.com/SamsonandDelilah/SciLab.git#subdirectory=python
 ```
 
@@ -48,9 +48,9 @@ print(RadiansToGrad("1.234e1"))                 # Scientific
 
 | Type | Examples |
 |------|----------|
-| Decimal | `180.57`, `"180.57grad"` |
-| DMS | `"180°20'13''"`, `"N 48°12'30''"` |
-| Scientific | `"1.234e2"`, `"2.3456E1grad"` |
+| Decimal grad | `180.57` |
+| DMS | `"180°20'13''"`  |
+| Scientific | `"1.234e2"` |
 | High-Precision | `mpfr("3.14159", 256)` |
 
 ## 🛠 Roadmap
