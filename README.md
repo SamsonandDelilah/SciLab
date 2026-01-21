@@ -1,5 +1,6 @@
 ## SciLib - High-Precision Scientific Library
 **Unified single Source-of-Truth (SOT) conversion for ALL input formats with automatic validation!**
+
 Contents:
 1. Angle Conversion (deg_to_rad, rad_to_deg)
 
