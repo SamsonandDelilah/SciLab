@@ -15,4 +15,4 @@ precision = ["gmpy2>=2.1.0"]  # Für mpfr Nutzer
 dev = ["pytest", "black"]
 
 [project.urls]
-Homepage = "https://github.com/SamsonandDelilah/SciLab"
+Homepage = "https://github.com/SamsonandDelilah/SciLib"
