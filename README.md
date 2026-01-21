@@ -6,9 +6,9 @@
 
 **Problem:** Every library handles angle systems differently:
 
-numpy.deg2rad("180°20'")     → Error
+numpy.deg2rad("180°20'")       → Error
 math.radians("180.57degree")   → Error  
-scipy.invalid_input("2g")    → Error
+scipy.invalid_input("2g")      → Error
 
 
 **SciLib solves it:** **1 API → all formats** with precision checking!
@@ -22,10 +22,10 @@ pip install git+https://github.com/SamsonandDelilah/SciLab.git#subdirectory=pyth
 ## 💻 Usage ##
 
 ```python
-from scilib import DegreeToRadians, RadiansToDegree
+from scilib import deg_to_rad, rad_to_deg
 
 # Safe usage with validation
-result = DegreeToRadians("N 180°")                # will generate error, displays the error
+result = deg_to_rad("N 180°")                     # will generate error, displays the error
 if result is not None:                            # and provides a 'None' value
     s = result * 34
 else:
@@ -33,24 +33,24 @@ else:
 
 # Broad format spectrum
 print("\nDegrees → Radians:")
-print(DegreeToRadians(180.57))                    # Decimal degrees example
-print(DegreeToRadians("180.57"))                  # Decimal degrees example
-print(DegreeToRadians("180°"))                    # DMS
-print(DegreeToRadians("180°40'13''"))             # DMS example
-print(DegreeToRadians("180°68'10''"))             # incorrect DMS example
-print(DegreeToRadians(2.3456e1))                  # Scientific notation example
-print(DegreeToRadians("2.3456e1"))                # Scientific notation example
-print(DegreeToRadians(mpfr("181.57")))            # mpfr decimal degrees example
-print(DegreeToRadians(mpfr("N 181.57")))          # incorrect mpfr decimal degrees example
-print(DegreeToRadians(mpfr("1.89°")))             # incorrect mpfr decimal degrees example
+print(deg_to_rad(180.57))                         # Decimal degrees example
+print(deg_to_rad("180.57"))                       # Decimal degrees example
+print(deg_to_rad("180°"))                         # DMS
+print(deg_to_rad("180°40'13''"))                  # DMS example
+print(deg_to_rad("180°68'10''"))                  # incorrect DMS example
+print(deg_to_rad(2.3456e1))                       # Scientific notation example
+print(deg_to_rad("2.3456e1"))                     # Scientific notation example
+print(deg_to_rad(mpfr("181.57")))                 # mpfr decimal degrees example
+print(deg_to_rad(mpfr("N 181.57")))               # incorrect mpfr decimal degrees example
+print(deg_to_rad(mpfr("1.89°")))                  # incorrect mpfr decimal degrees example
 
 print("\nRadians → Degrees:")
-print(RadiansToDegree(3.14))  
-print(RadiansToDegree("3.14"))  
-print(RadiansToDegree(np.pi))                     # π → 180° (mpfr)
-print(RadiansToDegree(mpfr('3.14159535', 128)))   # High precision
-print(RadiansToDegree("1.234e1"))                 # Scientific → Degrees
-print(RadiansToDegree("0.40938442"))              # DMS → Degrees (direct)
+print(rad_to_deg(3.14))  
+print(rad_to_deg("3.14"))  
+print(rad_to_deg(np.pi))                          # π → 180° (mpfr)
+print(rad_to_deg(mpfr('3.14159535', 128)))        # High precision
+print(rad_to_deg("1.234e1"))                      # Scientific → Degrees
+print(rad_to_deg("0.40938442"))                   # DMS → Degrees (direct)
 ```
 
 ## 🎯 Supported Formats
@@ -62,7 +62,7 @@ print(RadiansToDegree("0.40938442"))              # DMS → Degrees (direct)
 | Scientific | `"1.234e2"` |
 | High-Precision | `mpfr("3.14159", 256)` |
 
-Supported types are integer, float, decimal and BigFloat (with mfpr string format).
+Supported types are integer, float, decimal and Arbitrary Precision with mfpr string format (gmpy2.py).
 
 ## 🛠 Roadmap
 
