@@ -1,18 +1,18 @@
 ```markdown
 # SciLib - Precision Angle Conversion Library
 
-**Einheitliche SOT-Konvertierung für alle Eingabeformate mit automatischer Validierung!**
+**Unified SOT conversion for ALL input formats with automatic validation!**
 
 ## 🚀 Motivation
 
-**Problem:** Jede Bibliothek behandelt Winkelsysteme anders:
+**Problem:** Every library handles angle systems differently:
 ```
 numpy.deg2rad("180°20'")     → Error
 math.radians("180.57grad")   → Error  
 scipy.invalid_input("2g")    → Error
 ```
 
-**SciLib:** 1 API → alle Formate mit Präzisionsprüfung!
+**SciLib solves it:** **1 API → all formats** with precision checking!
 
 ## 📦 Installation
 
@@ -20,37 +20,37 @@ scipy.invalid_input("2g")    → Error
 pip install git+https://github.com/SamsonandDelilah/SciLab.git#subdirectory=python
 ```
 
-## 💻 Verwendung
+## 💻 Usage
 
 ```python
 from scilib import GradToRadians, RadiansToGrad
 
-# Sichere Verwendung mit Validierung
+# Safe usage with validation
 result = GradToRadians("180")
 if result is not None:
     s = result * 34
 else:
-    print("Berechnung kann nicht durchgeführt werden.")
+    print("Calculation cannot be performed.")
 
-# Breites Format-Spektrum
-print(GradToRadians(180.57))                    # Dezimalgrad
+# Broad format spectrum
+print(GradToRadians(180.57))                    # Decimal degrees
 print(GradToRadians("180°20'13''"))             # DMS
-print(GradToRadians("2.3456e1"))                # Wissenschaftlich
+print(GradToRadians("2.3456e1"))                # Scientific
 print(GradToRadians(mpfr("180.57")))           # High-Precision
 
-print("\nRadians → Grad:")
+print("\nRadians → Degrees:")
 print(RadiansToGrad(np.pi))                     # π → 180°
 print(RadiansToGrad(mpfr('3.1415926535', 128))) # 128-bit
-print(RadiansToGrad("1.234e1"))                 # Wissenschaftlich
+print(RadiansToGrad("1.234e1"))                 # Scientific
 ```
 
-## 🎯 Unterstützte Formate
+## 🎯 Supported Formats
 
-| Typ | Beispiele |
-|-----|-----------|
-| Dezimal | `180.57`, `"180.57grad"` |
+| Type | Examples |
+|------|----------|
+| Decimal | `180.57`, `"180.57grad"` |
 | DMS | `"180°20'13''"`, `"N 48°12'30''"` |
-| Wissenschaftlich | `"1.234e2"`, `"2.3456E1grad"` |
+| Scientific | `"1.234e2"`, `"2.3456E1grad"` |
 | High-Precision | `mpfr("3.14159", 256)` |
 
 ## 🛠 Roadmap
@@ -62,19 +62,11 @@ SciLab (Monorepo)
 └── cpp/        → #include <scilib-cpp>
 ```
 
-## 🤝 Feedback
+## 🤝 Feedback Welcome!
 
 https://github.com/SamsonandDelilah/SciLab/issues
 
-**Für 3D Graphics, Physik, Astronomie!** ⭐
+**For 3D Graphics, Physics, Astronomy and more!** ⭐
 ```
 
-**Speichern:**
-```powershell
-cd I:\Git\scilib
-notepad README.md
-# Inhalt kopieren
-git add README.md
-git commit -m "Add README.md"
-git push
-```
+**Perfect professional English README!** 🚀
