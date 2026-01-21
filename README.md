@@ -6,9 +6,9 @@
 
 **Problem:** Every library handles angle systems differently:
 
-numpy.deg2rad("180°20'")       → Error
-math.radians("180.57degree")   → Error  
-scipy.invalid_input("2g")      → Error
+`numpy.deg2rad("180°20'")`     → Error
+`math.radians("180.57degree")` → Error  
+`scipy.invalid_input("2g")`    → Error
 
 
 **SciLib solves it:** **1 API → all formats** with precision checking!
