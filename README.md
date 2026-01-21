@@ -72,7 +72,7 @@ Supported types are integer, float, decimal and Arbitrary Precision with mfpr st
 ## 🛠 Roadmap
 
 ```
-SciLab (Monorepo)
+SciLib (Monorepo)
 ├── python/     → pip install scilib
 ├── rust/       → cargo add scilib
 └── cpp/        → #include <scilib-cpp>
