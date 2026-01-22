@@ -4,6 +4,7 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/scilib"]
+include = ["/data"]
 
 [project]
 name = "scilib"

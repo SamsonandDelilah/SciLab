@@ -4,10 +4,33 @@ from typing import Any
 from enum import Enum
 from pathlib import Path
 import json
+import os
+from pathlib import Path
+
 
 # Logger setup
 logger = logging.getLogger("scilib")
 
+# absolute path for editable install
+REPO_ROOT = Path(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+DATA_PATH = REPO_ROOT / "data"
+
+def _get_data_path() -> Path:
+    """Dev: repo/data/ → Production: package data/"""
+    # 1. Package data (production)
+    try:
+        import importlib.resources
+        # Traverse: scilib → data → constants
+        data_path = Path(importlib.resources.files('scilib') / 'data')
+        if (data_path / 'constants').exists():
+            return data_path
+    except (ImportError, FileNotFoundError):
+        pass
+    
+    # 2. Dev: absolute repo path
+    repo_root = Path(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+    return repo_root / "data"
+    
 class ErrorMode(Enum):
     STRICT = "strict"      # raise alle Exceptions
     WARN = "warn"          # log warnings, return None  
@@ -70,20 +93,24 @@ class Config:
         if version is None:
             version = self.constants.version
         
-        # Versioned path
-        versioned_path = Path(f"data/constants/{version}/{name}.json")
+        data_path = _get_data_path()
+        
+        # Versioned first
+        versioned_path = data_path / f"constants/{version}/{name}.json"
         if versioned_path.exists():
             data = json.loads(versioned_path.read_text())
-        else:
-            # Latest fallback
-            latest_path = Path(f"data/constants/{name}.json")
-            data = json.loads(latest_path.read_text())
+            return data["value"], data["unit"], data["uncertainty"]
         
-        return (
-            data["value"],
-            data["unit"],
-            data["uncertainty"]
-        )
+        # Latest fallback
+        latest_path = data_path / f"constants/{name}.json"
+        if latest_path.exists():
+            data = json.loads(latest_path.read_text())
+            return data["value"], data["unit"], data["uncertainty"]
+        
+        # ← SCI-LIB STYLE!
+        self.handle_error(f"Constant '{name}' not found in {data_path}")
+        return None  # SILENT fallback
+    
         
     def handle_error(self, msg: str) -> Any:
         """Unified error handling across SciLib."""
@@ -92,7 +119,9 @@ class Config:
             raise ValueError(msg)
         elif mode == ErrorMode.WARN:
             logger.warning(msg)
-        return None  # SILENT
+        elif mode == ErrorMode.SILENT:  
+            logger.debug(msg)  # Still logged, but no user impact
+        return None # SILENT
     
     
 
