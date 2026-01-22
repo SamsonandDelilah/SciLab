@@ -9,10 +9,9 @@ packages = ["."]  # ← KRITISCH: Inkludiert python/ als scilib/
 name = "scilib"
 version = "0.1.0"
 description = "High-Precision scientific calculations"
-readme = "README.md"
 requires-python = ">=3.8"
 dependencies = ["numpy"]
-license = {text = "MIT"}  # Inline MIT ✓
+
 
 [project.optional-dependencies]
 precision = ["gmpy2>=2.1.0"]  # Für mpfr Nutzer
