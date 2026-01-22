@@ -90,7 +90,7 @@ https://github.com/SamsonandDelilah/SciLib/issues
 
 ## Licensing
 
-Scilib is released under the MIT license.
+Scilib is released under the [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/SamsonandDelilah/SciLib/blob/main/LICENSE) license.
 
 **For 3D Graphics, Physics, Astronomy and more!** ⭐
 
