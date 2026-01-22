@@ -86,7 +86,7 @@ pip install git+https://github.com/SamsonandDelilah/SciLib.git#subdirectory=pyth
 
 I would love to hear from you, what you think about or how I can help or how you possible would like to help me.
 
-https://github.com/SamsonandDelilah/SciLab/issues
+https://github.com/SamsonandDelilah/SciLib/issues
 
 **For 3D Graphics, Physics, Astronomy and more!** ⭐
 
