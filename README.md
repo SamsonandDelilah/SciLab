@@ -69,8 +69,8 @@ print(rad_to_deg("0.40938442"))                   # DMS → Degrees (direct)
 | Scientific | `"1.234e2"` |
 | High-Precision | `mpfr("3.14159", 256)` |
 
+> **⚠️ Warning**: `mpfr()` ist ein interner Wrapper für `gmpy2.mpfr()` in `convert_angle_units.py`. Externe `gmpy2` Installation optional.
 Supported types are integer, float, decimal and Arbitrary Precision with mfpr string format (gmpy2.py).
-Warning: mpfr is a wrapper of mpfr (from gmpy2.py) in convert_angle_units()
 
 ## 🛠 Roadmap
 
