@@ -16,6 +16,7 @@ dependencies = ["numpy", "gmpy2>=2.1.0"]
 
 [project.optional-dependencies]
 dev = ["pytest", "black"]
+data = ["importlib_resources"]          # Production data loader
 
 # Usage:
 # pip install scilib                    → Basic (float fallback)
