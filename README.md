@@ -23,7 +23,7 @@ Contents:
 
 ```python
 # 1. Namespace Import (recommended)
-from scilib import deg_to_rad, rad_to_deg, config # Warning: mpfr is a wrapper of mpfr in convert_degree_to_radians()
+from scilib import deg_to_rad, rad_to_deg, config # Warning: mpfr is a wrapper of mpfr in convert_angle_units()
 
 # 2. Direct Module Import  
 #from scilib.convert_angle_units import deg_to_rad
