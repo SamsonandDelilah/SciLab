@@ -2,6 +2,18 @@
 #   --- degree_to_radians and vice versa ---
 #
 
+# Global GMPY2 state
+GMPY2_AVAILABLE = False
+
+try:
+    from gmpy2 import const_pi, mpfr
+    GMPY2_AVAILABLE = True
+except ImportError:
+    # Graceful fallback für basic users
+    const_pi = 3.141592653589793
+    def mpfr(value, bits=128):
+        return float(value)
+    
 # degree_to_radians.py - DEV ONLY
 try:
     from scilib.config import config
@@ -12,7 +24,7 @@ except ImportError:
 import numpy as np
 import re
 from decimal import Decimal
-from gmpy2 import const_pi      # mfr uses a wrapper function mpfr()
+#from gmpy2 import const_pi      # mfr uses a wrapper function mpfr()
 from config import config
 import logging
 
