@@ -13,8 +13,8 @@ logger = logging.getLogger("scilib")
 
 
 def _get_data_path() -> Path:
-    """KORRIGIERT für SciLib/data/ (alle Sprachen!)"""
-    # 1. Package data (zukünftig - wenn data/ in src/scilib/data/)
+    """Repo-Root Packaging: python/src/scilib → ROOT → data/"""
+    # 1. Package data (Production)
     try:
         import importlib.resources
         data_path = Path(importlib.resources.files('scilib') / 'data')
@@ -23,9 +23,9 @@ def _get_data_path() -> Path:
     except (ImportError, FileNotFoundError):
         pass
     
-    # 2. Dev: REPO-LEVEL data/ (I:\git\scilib\data\) ← HIER FIX!
-    repo_root = Path(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-    return repo_root.parent / "data"  # ← .parent statt / "data" !
+    # 2. Dev Repo-Root: 4x dirname = SciLib/
+    repo_root = Path(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))  # SciLib/
+    return repo_root / "data"  # ← ROOT/data/ !
 
     
 class ErrorMode(Enum):
