@@ -54,7 +54,7 @@ print(deg_to_rad(mpfr("1.89°")))                  # ❌ will display Error, inc
 print("\nRadians → Degrees:")
 print(rad_to_deg(3.14))  
 print(rad_to_deg("3.14"))  
-print(rad_to_deg(np.pi))                          # π → 180° (mpfr)
+print(rad_to_deg(np.pi))                          # π → 180°
 print(rad_to_deg(mpfr('3.14159535', 128)))        # High precision
 print(rad_to_deg("1.234e1"))                      # Scientific → Degrees
 print(rad_to_deg("0.40938442"))                   # DMS → Degrees (direct)
@@ -69,16 +69,21 @@ print(rad_to_deg("0.40938442"))                   # DMS → Degrees (direct)
 | Scientific | `"1.234e2"` |
 | High-Precision | `mpfr("3.14159", 256)` |
 
-> **⚠️ Warning**: `mpfr()` is an internal wrapper of `gmpy2.mpfr()` in `convert_angle_units.py`. External `gmpy2` installation optional.
+> **⚠️ Warning**: `mpfr()` is an internal wrapper of `gmpy2.mpfr()` (must be installed - see project.toml) in `convert_angle_units.py`.
 Supported types are integer, float, decimal and Arbitrary Precision with `gmpy2.mpfr()` string format.
 
 ## 🛠 Roadmap
 
 ```
-SciLib (Monorepo)
-├── python/     → pip install scilib
-├── rust/       → cargo add scilib
-└── cpp/        → #include <scilib-cpp>
+SciLib/                   # Root
+├── README.md             # Monorepo Overview tbd
+├── python/
+│   ├── README.md         # Python Details
+│   └── src/scilib/...
+├── rust/
+│   └── README.md         # Rust Details tbd
+└── cpp/
+    └── README.md         # C++ Details tbd
 ```
 
 It is intended to expand this SciLib continously (fully supporting a simple SOT approach only), help is welcome.
