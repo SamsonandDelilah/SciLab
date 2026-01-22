@@ -4,11 +4,11 @@
 
 ## 🚀 Languages
 
-| Language | Install | Import |
-|----------|---------|--------|
-| Python   | `pip install scilib` | `from scilib import deg_to_rad` |
-| Rust     | `cargo add scilib` | `use scilib::deg_to_rad;` |
-| C++      | `vcpkg install scilib` | `#include <scilib/angle.hpp>` |
+| Language | Status | Install | Import |
+|----------|--------|---------|--------|
+| 🐍 Python | ✅ Live | `pip install scilib` | `from scilib import deg_to_rad` |
+| 🦀 Rust | ⏳ Coming soon | `cargo add scilib` | `use scilib::deg_to_rad;` |
+| ⚡ C++ | ⏳ Coming soon | `vcpkg install scilib` | `#include <scilib/angle.hpp>` |
 
 ## 📦 Quickstart Python
 ```bash
