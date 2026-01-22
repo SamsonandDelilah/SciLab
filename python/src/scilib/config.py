@@ -13,23 +13,23 @@ logger = logging.getLogger("scilib")
 
 # absolute path for editable install
 REPO_ROOT = Path(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-DATA_PATH = REPO_ROOT / "data"
+DATA_PATH = REPO_ROOT.parent / "data"  
 
 def _get_data_path() -> Path:
-    """Dev: repo/data/ → Production: package data/"""
-    # 1. Package data (production)
+    """KORRIGIERT für SciLib/data/ (alle Sprachen!)"""
+    # 1. Package data (zukünftig - wenn data/ in src/scilib/data/)
     try:
         import importlib.resources
-        # Traverse: scilib → data → constants
         data_path = Path(importlib.resources.files('scilib') / 'data')
         if (data_path / 'constants').exists():
             return data_path
     except (ImportError, FileNotFoundError):
         pass
     
-    # 2. Dev: absolute repo path
+    # 2. Dev: REPO-LEVEL data/ (I:\git\scilib\data\) ← HIER FIX!
     repo_root = Path(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-    return repo_root / "data"
+    return repo_root.parent / "data"  # ← .parent statt / "data" !
+
     
 class ErrorMode(Enum):
     STRICT = "strict"      # raise alle Exceptions
