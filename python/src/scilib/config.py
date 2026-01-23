@@ -14,20 +14,12 @@ logger = logging.getLogger("scilib")
 
 
 def _get_data_path():
-    """Data path: dev + installed package"""
     try:
-        # ✅ INSTALLED: importlib.resources (Python 3.7+)
-        from importlib import resources
-        return resources.files('scilib') / 'data'
+        from importlib.resources import files
+        return files('scilib.data')  # scilib/data/
     except ImportError:
-        try:
-            # ✅ Python 3.9+: files()
-            from importlib.resources import files
-            return files('scilib') / 'data'
-        except (ImportError, AttributeError):
-            # ✅ DEV FALLBACK
-            from pathlib import Path
-            return Path(__file__).parent.parent / 'data'  # scilib/data/
+        from pathlib import Path
+        return Path(__file__).parent / 'data'
 
     
 class ErrorMode(Enum):
