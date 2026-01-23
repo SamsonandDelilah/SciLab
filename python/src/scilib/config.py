@@ -14,9 +14,11 @@ logger = logging.getLogger("scilib")
 
 
 def _get_data_path():
-    """Data path: installed package → project root fallback"""
+    from pathlib import Path  # ← HIER FEHLT!
+    import os, site
+    
     try:
-        # 1. Try package data first
+        # 1. Package data (Python 3.9+)
         from importlib.resources import files
         data_path = files('scilib') / 'data'
         if data_path.exists():
@@ -24,17 +26,8 @@ def _get_data_path():
     except:
         pass
     
-    # 2. FALLBACK: Find project root (works for dev + installed)
-    import os, site
-    site_packages = site.getsitepackages()
-    for sp in site_packages:
-        candidate = Path(sp).parent / 'scilib' / 'data'
-        if candidate.exists():
-            return candidate
-    
-    # 3. Dev fallback
-    from pathlib import Path
-    return Path(__file__).parent.parent.parent / 'data'
+    # 2. Dev fallback: relative zum Projekt root
+    return Path(__file__).parent.parent.parent / 'data'  # ROOT/data/
 
 class ErrorMode(Enum):
     STRICT = "strict"      # raise alle Exceptions
