@@ -11,7 +11,7 @@ build-backend = "hatchling.build"
 packages = ["src/python"]
 
 [tool.hatch.build.targets.sdist.force-include]
-"data/fixtures" = "python/data"  # Include the fixtures directory in the sdist
+"data/fixtures" = "python/data/constants"  # Include the fixtures directory in the sdist
 
 [project]
 name = "scilib"
