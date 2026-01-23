@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: scilib
+Version: 0.1.0
+Summary: High-Precision scientific calculations
+Requires-Python: >=3.8
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: gmpy2>=2.1.0
+Dynamic: license-file

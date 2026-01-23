@@ -9,13 +9,12 @@ where = ["python/src"]
 [tool.setuptools.package-data]
 "scilib" = ["data/**/*"]
 
-
 [project]
 name = "scilib"
 version = "0.1.0"
 description = "High-Precision scientific calculations"
 requires-python = ">=3.8"
-dependencies = ["numpy", "gmpy2>=2.1.0"]
+dependencies = ["numpy", "gmpy2>=2.1.0", "requests"] 
 
 # Usage:
 # pip install scilib                    → Basic (float fallback)

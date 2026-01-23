@@ -5,54 +5,39 @@ from enum import Enum
 from pathlib import Path
 import json
 import os
-import io
-import zipfile
-import requests
 from pathlib import Path
-from urllib.parse import urljoin
+from importlib import resources
+constants_path = resources.files(__package__) / "data" / "constants"
 
 # Logger setup
 logger = logging.getLogger("scilib")
 
 
-def ensure_data():
-    """Auto-download SciLib data bei erstem Lauf"""
-    data_dir = Path.home() / ".scilib" / "data"
-    data_dir.mkdir(parents=True, exist_ok=True)
-    
-    json_path = data_dir / "constants" / "speed_of_light.json"
-    if not json_path.exists():
-        print("📥 Downloading SciLib data (first run)...")
-        
-        # GitHub Releases (automatisch latest)
-        repo_url = "https://github.com/SamsonandDelilah/SciLib"
-        api_url = f"{repo_url}/releases/latest"
-        release = requests.get(api_url).json()
-        
-        # Finde data.zip asset
-        data_asset = next((a for a in release['assets'] if 'data' in a['name'].lower()), None)
-        if not data_asset:
-            raise RuntimeError("data.zip not found in latest release. Please check GitHub.")
-        
-        print(f"  ↓ {data_asset['name']} ({data_asset['size']/1e6:.1f} MB)")
-        zip_content = requests.get(data_asset['browser_download_url']).content
-        
-        # Extract
-        with zipfile.ZipFile(io.BytesIO(zip_content)) as z:
-            z.extractall(data_dir)
-        
-        print("✅ SciLib data ready! (~/.scilib/data/)")
-    
-    return data_dir
-
 def _get_data_path():
-    """Data path mit auto-download"""
+    """Find data/ automatically - dev + production ready"""
+    from pathlib import Path
+    import os
+    
+    # 1. ENV var (production)
     data_dir = os.getenv('SCILIB_DATA')
-    if data_dir:
+    if data_dir and Path(data_dir).exists():
         return Path(data_dir)
     
-    return ensure_data()
-
+    # 2. Git root detection (dev)
+    cwd = Path.cwd()
+    candidates = [
+        cwd / 'data',
+        cwd.parent / 'data', 
+        cwd / '..',
+        cwd / '../data'
+    ]
+    
+    for candidate in candidates:
+        if (candidate / 'constants/speed_of_light.json').exists():
+            return candidate
+    
+    # 3. Fail safe
+    raise FileNotFoundError("SCILIB_DATA env or data/ not found")
 
 class ErrorMode(Enum):
     STRICT = "strict"      # raise alle Exceptions
