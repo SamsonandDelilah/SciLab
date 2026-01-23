@@ -14,20 +14,30 @@ logger = logging.getLogger("scilib")
 
 
 def _get_data_path():
-    from pathlib import Path  # ← HIER FEHLT!
-    import os, site
+    """Find data/ automatically - dev + production ready"""
+    from pathlib import Path
+    import os
     
-    try:
-        # 1. Package data (Python 3.9+)
-        from importlib.resources import files
-        data_path = files('scilib') / 'data'
-        if data_path.exists():
-            return data_path
-    except:
-        pass
+    # 1. ENV var (production)
+    data_dir = os.getenv('SCILIB_DATA')
+    if data_dir and Path(data_dir).exists():
+        return Path(data_dir)
     
-    # 2. Dev fallback: relative zum Projekt root
-    return Path(__file__).parent.parent.parent / 'data'  # ROOT/data/
+    # 2. Git root detection (dev)
+    cwd = Path.cwd()
+    candidates = [
+        cwd / 'data',
+        cwd.parent / 'data', 
+        cwd / '..',
+        cwd / '../data'
+    ]
+    
+    for candidate in candidates:
+        if (candidate / 'constants/speed_of_light.json').exists():
+            return candidate
+    
+    # 3. Fail safe
+    raise FileNotFoundError("SCILIB_DATA env or data/ not found")
 
 class ErrorMode(Enum):
     STRICT = "strict"      # raise alle Exceptions
