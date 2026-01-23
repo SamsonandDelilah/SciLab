@@ -6,9 +6,10 @@ build-backend = "hatchling.build"
 # Wheel (Production)
 [tool.hatch.build.targets.wheel]
 packages = ["python/src/scilib"]     # ← Von ROOT!
+sources = { "scilib/data" = "data" }
 include = [
-  "data/**/*.json",     # ← Spezifisch JSONs!
-  "data/constants"
+  "data",                    # ← ROOT data/
+  "data/constants/*.json"    # ← Spezifisch!
 ]
 
 # SDist (Source)
