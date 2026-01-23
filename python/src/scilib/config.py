@@ -13,21 +13,17 @@ constants_path = resources.files(__package__) / "data" / "constants"
 logger = logging.getLogger("scilib")
 
 
-def _get_data_path() -> Path:
-    """Repo-Root: python/src/scilib → ROOT → data/"""
-    # 1. Production: scilib/data/ (Wheel/SDist)
+def _get_data_path():
+    """Get data directory - works for both dev AND installed package"""
     try:
-        import importlib.resources
-        data_path = Path(importlib.resources.files('scilib') / 'data')
-        if (data_path / 'constants').exists():
-            return data_path
-    except (ImportError, FileNotFoundError):
-        pass
-    
-    # 2. Dev: 4x dirname → SciLib/ ROOT
-    repo_root = Path(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))
-    data_path = repo_root / "data"
-    return data_path
+        # Installed package: importlib.resources (Python 3.9+)
+        from importlib import resources
+        return resources.files('scilib') / 'data'
+    except (ImportError, AttributeError):
+        # Dev fallback: relative to config.py
+        from pathlib import Path
+        return Path(__file__).parent / 'data'
+
 
 
     
