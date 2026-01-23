@@ -16,6 +16,9 @@ description = "High-Precision scientific calculations"
 requires-python = ">=3.8"
 dependencies = ["numpy", "gmpy2>=2.1.0", "requests"] 
 
+[project.optional-dependencies]
+dev = ["requests", "jsonschema"]
+
 # Usage:
 # pip install scilib                    → Basic (float fallback)
 # pip install "scilib[precision]"       → High-Precision (gmpy2)

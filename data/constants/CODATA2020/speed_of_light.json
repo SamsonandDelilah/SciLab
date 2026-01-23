@@ -1,0 +1,17 @@
+{
+    "symbol": "c",
+    "name": "speed of light in vacuum",
+    "value": 299792458.0,
+    "unit": "m s^-1",
+    "category": "universal",
+    "uncertainty": 0.0,
+    "year": 2020,
+    "source": "CODATA 2020",
+    "description": "Exact value by definition since 2020 SI revision",
+    "relations": {
+        "used_in": [
+            "relativity",
+            "electrodynamics"
+        ]
+    }
+}

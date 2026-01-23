@@ -112,29 +112,56 @@ class Config:
             self.constants.version = version
             
     def physical_constants(self, name, version=None):
-        """SciPy-kompatibel: ('speed of light') → (value, unit, unc)"""
+        """Lazy load: default → cache hit, versioned → on-demand"""
         if version is None:
-            version = self.constants.version
+            version = self.constants.version  # CODATA2022 default
+            
+        # Cache check (schnell!)
+        cache_key = f"{name}_{version}"
+        if hasattr(self, '_constants_cache') and cache_key in self._constants_cache:
+            return self._constants_cache[cache_key]
         
+        # Lazy load
         data_path = _get_data_path()
+        json_path = data_path / f"constants/{version}/{name}.json"
         
-        # Versioned first
-        versioned_path = data_path / f"constants/{version}/{name}.json"
-        if versioned_path.exists():
-            data = json.loads(versioned_path.read_text())
-            return data["value"], data["unit"], data["uncertainty"]
+        if json_path.exists():
+            data = json.loads(json_path.read_text())
+            result = (data["value"], data.get("unit", ""), data.get("uncertainty", 0.0))
+            
+            # Cache für Performance
+            if not hasattr(self, '_constants_cache'):
+                self._constants_cache = {}
+            self._constants_cache[cache_key] = result
+            return result
         
-        # Latest fallback
-        latest_path = data_path / f"constants/{name}.json"
-        if latest_path.exists():
-            data = json.loads(latest_path.read_text())
-            return data["value"], data["unit"], data["uncertainty"]
+        self.handle_error(f"Constant '{name}' (version '{version}') not found")
+        return None
+
+
+    def get_info(self):
+        """Config Status + Default Version"""
+        return {
+            'default_version': self.constants.version,      # CODATA2022
+            'data_path': _get_data_path(),
+            'cache_size': len(getattr(self, '_constants_cache', {})),
+            'available_versions': self.list_versions(),
+            'loaded_constants': list(getattr(self, '_constants_cache', {}).keys())
+        }
+
+    def list_versions(self):
+        """Verfügbare CODATA Versionen"""
+        data_path = _get_data_path()
+        versions = [d.name for d in (data_path / "constants").iterdir() if d.is_dir()]
+        return sorted(versions, reverse=True)  # Neueste zuerst
+
+    def status(self):
+        """Kurzstatus"""
+        print(f"SciLib config: {self.constants.version} | "
+            f"{len(getattr(self, '_constants_cache', {}))} cached | "
+            f"{_get_data_path()}")
         
-        # ← SCI-LIB STYLE!
-        self.handle_error(f"Constant '{name}' not found in {data_path}")
-        return None  # SILENT fallback
-    
-        
+            
     def handle_error(self, msg: str) -> Any:
         """Unified error handling across SciLib."""
         mode = self.errors.mode
